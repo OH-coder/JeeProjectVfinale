@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Title</title>
+	<link rel="stylesheet" type="text/css"
+		  th:href="@{/webjars/bootstrap/4.5.3/css/bootstrap.min.css}"/>
+<script src="https://kit.fontawesome.com/b7587251ff.js"
+	crossorigin="anonymous"></script>
+<style>
+th, td {
+	width: 200px;
+}
+
+ul li {
+	display: inline-block;
+}
+</style>
+</head>
+<body>
+	<div class="container">
+		<div align="center">
+			<div>
+				<nav class="navbar navbar-expand-lg navbar-light bg-light">
+					<a class="navbar-brand" href="/logout">Logout</a>
+				</nav>
+				<div class="card-header">liste des Comptes</div>
+				<div class="card-header">
+					<a href="/new-compte">Create New Compte</a>
+				</div>
+				<div class="card-body ">
+<form method="get" th:action="${'/'}" ></form>
+					<table class="table  table-hover">
+						<thead class="thead-dark">
+							<tr>
+								<th>RIB</th>
+								<th>Solde</th>
+								<th>modifier Compte</th>
+								<th>suprimer Compte</th>
+							</tr>
+						</thead>
+						
+						<tbody>
+							<tr id="" th:each="compte : ${listcomptes}">
+								<td th:text="${compte.rib}"></td>
+								<td th:text="${compte.solde}"> DT</td>
+								<td><a th:href="@{/editCompte/{id}(id=${compte.rib})}"> <i
+										class="fas fa-edit"></i>Edit
+								</a></td>
+								<td><a id="delete" class="btn btn-danger" th:onclick="'javascript:confirmDelete2(' + ${compte.rib} + ');'"> <i
+										class="fas fa-trash-alt" ></i>Delete
+								</a></td>
+							</tr>
+						</tbody>
+					</table>
+
+					<!-- <ul class="nav nav-pills">
+						<li th:each="page,status:${pages}"><a
+							th:class="${status.index==currentPage?'btn btn-primary':'btn'}"
+							th:href="@{/(page=${status.index})}" th:text="${status.index}"></a>
+						</li>
+					</ul>
+ -->
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script th:src="@{/webjars/jquery/3.5.1/jquery.min.js/}"></script>
+	<script type="text/javascript"
+	th:src="@{/webjars/bootstrap/4.5.3/js/bootstrap.min.js}"></script>
+	<script th:src="@{/webjars/popper.js/1.16.0/umd/popper.min.js}"></script>
+	<script src="js/main.js"></script>
+</body>
+</html>

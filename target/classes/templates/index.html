@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Title</title>
+<<link rel="stylesheet" type="text/css"
+	   th:href="@{/webjars/bootstrap/4.5.3/css/bootstrap.min.css}"/>
+<script src="https://kit.fontawesome.com/b7587251ff.js"
+	crossorigin="anonymous"></script>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	<script src=" https://code.jquery.com/jquery-3.4.1.min.js "></script>
+<style>
+th, td {
+	width: 200px;
+}
+
+ul li {
+	display: inline-block;
+}
+</style>
+</head>
+<body>
+	<div class="container">
+		<div align="center">
+			<div>
+				<nav class="navbar navbar-expand-lg navbar-light bg-light">
+					<a class="navbar-brand" href="/logout">Logout</a>
+				</nav>
+				<div class="card-header">liste des Clients</div>
+				<div class="card-header">
+					<a  class="btn btn-lg btn-secondary" href="/new">Create New Client</a>
+				</div>
+				<div class="card-body ">
+<form method="get" th:action="${'/'}" ></form>
+					<table class="table  table-hover">
+						<thead class="thead-dark">
+							<tr>
+								<th>Client ID</th>
+								<th>CIN</th>
+								<th>Name</th>
+								<th>Adresse</th>
+								<th>Liste des Comptes</th>
+								<th>modifier Client</th>
+								<th>suprimer Client</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr  id="myTableRow" th:each="client : ${listclients}">
+								<td  id="clientId" th:text="${client.id}">client ID</td>
+								<td th:text="${client.cin}">Cin</td>
+								<td th:text="${client.name}">Name</th>
+								<td th:text="${client.adresse}">Adresse</td>
+								<td><a class="btn btn-success btn-lg" 
+								th:href="@{/compte/{id}(id=${client.id})}">
+								Liste des comptes </a></td>
+								<td><a th:href="@{/editClient/{id}(id=${client.id})}"> <i
+										class="fas fa-edit"></i>Edit
+								</a></td>
+								<td><a id="delete" class="btn btn-danger" th:onclick="'javascript:confirmDelete(' + ${client.id} + ');'"> <i
+										class="fas fa-trash-alt" ></i>Delete
+								</a></td>
+
+								
+								
+									<!-- <ul class="list-group" th:each="compte: ${client.compte}">
+										rib :
+										<li class="list-group-item list-group-item-success"
+											th:text="${compte.rib}"></li>solde :
+										<li class="list-group-item list-group-item-success"
+											th:text="${compte.solde}"></li>
+										<li class="list-group-item list-group-item-success">
+											<a th:href="@{/compte/{rib}(rib=${compte.rib})">
+											voir compte</a>
+										</li>
+
+									</ul> -->
+						
+								<!-- <td><a th:href="@{/edit/{id}(id=${product.id})}"> <i
+										class="fas fa-edit"></i>Edit
+								</a></td>
+								<td><a th:href="@{/delete/{id}(id=${product.id})}"> <i
+										class="fas fa-trash-alt"></i>Delete
+								</a></td> -->
+							</tr>
+						</tbody>
+					</table>
+
+					<ul class="nav nav-pills">
+						<li th:each="page,status:${pages}"><a
+							th:class="${status.index==currentPage?'btn btn-primary':'btn'}"
+							th:href="@{/(page=${status.index})}" th:text="${status.index}"></a>
+						</li>
+					</ul>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+
+<script src="js/main.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css"
+          th:href="@{/webjars/bootstrap/4.5.3/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" type="text/css"
+          href="css/template.css">
+    <script src="https://kit.fontawesome.com/b7587251ff.js"
+            crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <style>
+
+
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="/logout">Logout</a>
+</nav>
+<h1 class="title">add Client</h1>
+<form class="contact-form row" th:action="@{/saveClient}" method="post" th:object="${client}">
+    <div class="form-field col-lg-6">
+        <input id="name" class="input-text js-input" th:field="*{name} "type="text" required>
+        <label class="label" for="name">Name</label>
+    </div>
+    <div class="form-field col-lg-6 ">
+        <input id="adress" class="input-text js-input"  th:field="*{adresse}"type="text" required>
+        <label class="label" for="adress">adress</label>
+    </div>
+        <input  id="ID" class="input-text js-input"  th:field="*{id}"type="hidden" required>
+    <div class="form-field col-lg-6 ">
+        <input id="cin" class="input-text js-input" th:field="*{cin}" type="text" required>
+        <label class="label" for="cin">carte D'identité National</label>
+    </div>
+    <div class="form-field col-lg-12">
+        <input class="submit-btn" type="submit" value="Submit">
+    </div>
+</form>
+</body>
+</html>
